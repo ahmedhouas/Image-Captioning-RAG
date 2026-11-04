@@ -1,0 +1,38 @@
+
+# ==========================================
+# DATASETS - Never upload datasets to GitHub
+# ==========================================
+
+# Original COCO dataset
+/00_original_data/
+
+# Processed datasets, images, and annotations
+/02_processed_data/
+
+# ==========================================
+# Python generated files
+# ==========================================
+
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# ==========================================
+# Jupyter Notebook files
+# ==========================================
+
+.ipynb_checkpoints/
+
+# ==========================================
+# IDE and operating system files
+# ==========================================
+
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
