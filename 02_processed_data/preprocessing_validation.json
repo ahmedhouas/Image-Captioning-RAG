@@ -1,0 +1,30 @@
+{
+    "stage": "image_preprocessing",
+    "model": "openai/clip-vit-base-patch32",
+    "input_format": "RGB",
+    "tensor_shape": [
+        1,
+        3,
+        224,
+        224
+    ],
+    "tensor_dtype": "float32",
+    "results": {
+        "training": {
+            "total": 9900,
+            "successful": 9900,
+            "failed": 0
+        },
+        "validation": {
+            "total": 100,
+            "successful": 100,
+            "failed": 0
+        },
+        "test": {
+            "total": 100,
+            "successful": 100,
+            "failed": 0
+        }
+    },
+    "status": "passed"
+}

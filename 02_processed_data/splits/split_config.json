@@ -1,0 +1,10 @@
+{
+    "random_seed": 45,
+    "source_training_dataset": "COCO train2017",
+    "source_test_dataset": "COCO val2017",
+    "total_selected_from_train2017": 10000,
+    "training_images": 9900,
+    "validation_images": 100,
+    "test_images": 100,
+    "selection_method": "Random sampling with fixed seed"
+}

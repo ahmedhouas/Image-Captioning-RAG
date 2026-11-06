@@ -1,38 +1,50 @@
+# ============================================================
+# ORIGINAL DATASET — NEVER UPLOAD
+# ============================================================
 
-# ==========================================
-# DATASETS - Never upload datasets to GitHub
-# ==========================================
-
-# Original COCO dataset
 /00_original_data/
 
-# Processed datasets, images, and annotations
-/02_processed_data/
 
-# ==========================================
-# Python generated files
-# ==========================================
+# ============================================================
+# PROCESSED DATA
+# Keep all processed data EXCEPT image files
+# ============================================================
+
+# Ignore image directories inside processed data
+/02_processed_data/**/images/
+
+# Ignore image files anywhere else inside processed data
+/02_processed_data/**/*.jpg
+/02_processed_data/**/*.jpeg
+/02_processed_data/**/*.png
+/02_processed_data/**/*.webp
+/02_processed_data/**/*.bmp
+02_processed_data/training/annotations/instances.json
+
+
+# ============================================================
+# PYTHON
+# ============================================================
 
 __pycache__/
 *.py[cod]
-*$py.class
-
-# Virtual environments
-venv/
-.venv/
-env/
-
-# ==========================================
-# Jupyter Notebook files
-# ==========================================
-
 .ipynb_checkpoints/
 
-# ==========================================
-# IDE and operating system files
-# ==========================================
 
-.vscode/
-.idea/
+# ============================================================
+# ENVIRONMENT AND SECRETS
+# ============================================================
+
+.env
+.venv/
+venv/
+
+
+# ============================================================
+# TEMPORARY FILES
+# ============================================================
+
+*.tmp
+*.log
 .DS_Store
 Thumbs.db
