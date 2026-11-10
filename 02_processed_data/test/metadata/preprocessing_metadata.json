@@ -3,7 +3,7 @@
   "image_preprocessing": {
     "exif_orientation_correction": true,
     "colour_conversion": "RGB",
-    "image_processor": "CLIPProcessor",
+    "image_processor": "CLIP image processor",
     "model": "openai/clip-vit-base-patch32",
     "output_tensor_shape": [
       1,

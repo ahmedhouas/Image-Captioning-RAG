@@ -19,7 +19,7 @@
 /02_processed_data/**/*.png
 /02_processed_data/**/*.webp
 /02_processed_data/**/*.bmp
-02_processed_data/training/annotations/instances.json
+/02_processed_data/training/annotations/instances.json
 
 
 # ============================================================

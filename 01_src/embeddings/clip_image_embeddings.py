@@ -1,14 +1,13 @@
-
 """
 CLIP image embedding generation.
 
 Generates image embeddings using:
 openai/clip-vit-base-patch32
 
-The generated embeddings are raw CLIP image features.
-No additional L2 normalization is applied.
+The generated embeddings are projected CLIP image features.
+L2 normalization is applied to each image embedding.
+The output embeddings are stored as float32.
 """
-
 import json
 from pathlib import Path
 
