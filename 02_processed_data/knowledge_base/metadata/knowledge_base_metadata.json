@@ -67,5 +67,31 @@
     "description": "Only the 9900 training images and their 49500 captions are included in this knowledge base."
   },
   "construction_date_utc": "2026-11-06T00:28:29.614116+00:00",
-  "construction_status": "completed"
+  "construction_status": "completed",
+  "pipeline_configuration": {
+    "random_seed": 45,
+    "sources": {
+      "training": "train2017",
+      "test": "val2017"
+    },
+    "split_sizes": {
+      "training": 9900,
+      "validation": 100,
+      "test": 100
+    },
+    "captions_per_image": 5,
+    "models": {
+      "clip": "openai/clip-vit-base-patch32",
+      "sbert": "sentence-transformers/all-MiniLM-L6-v2"
+    },
+    "embedding": {
+      "clip_batch_size": 32,
+      "sbert_batch_size": 64,
+      "dtype": "float32",
+      "normalize": true
+    },
+    "retrieval": {
+      "top_k": 3
+    }
+  }
 }

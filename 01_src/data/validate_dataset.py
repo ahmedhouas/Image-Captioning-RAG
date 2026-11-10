@@ -18,6 +18,7 @@ from config.pipeline_config import (  # noqa: E402
     TEST_SIZE,
     TRAINING_SIZE,
     VALIDATION_SIZE,
+    validate_saved_pipeline_compatibility,
 )
 
 
@@ -439,6 +440,9 @@ def main():
     print("=" * 60)
     print("DATASET VALIDATION")
     print("=" * 60)
+
+    validate_saved_pipeline_compatibility()
+    print("Pipeline configuration compatibility - OK")
 
     # Load saved IDs
     split_ids = load_split_ids()

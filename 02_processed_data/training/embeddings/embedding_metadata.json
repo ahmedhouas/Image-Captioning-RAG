@@ -110,5 +110,31 @@
         "numpy": "1.26.4",
         "pillow": "10.3.0"
     },
-    "overall_validation_status": "passed"
+    "overall_validation_status": "passed",
+    "pipeline_configuration": {
+        "random_seed": 45,
+        "sources": {
+            "training": "train2017",
+            "test": "val2017"
+        },
+        "split_sizes": {
+            "training": 9900,
+            "validation": 100,
+            "test": 100
+        },
+        "captions_per_image": 5,
+        "models": {
+            "clip": "openai/clip-vit-base-patch32",
+            "sbert": "sentence-transformers/all-MiniLM-L6-v2"
+        },
+        "embedding": {
+            "clip_batch_size": 32,
+            "sbert_batch_size": 64,
+            "dtype": "float32",
+            "normalize": true
+        },
+        "retrieval": {
+            "top_k": 3
+        }
+    }
 }

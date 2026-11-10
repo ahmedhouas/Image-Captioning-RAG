@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 # ============================================================
@@ -109,3 +110,50 @@ def get_pipeline_snapshot():
             "top_k": RETRIEVAL_TOP_K,
         },
     }
+
+
+def load_saved_pipeline_snapshot(config_file=None):
+    """Load the configuration snapshot saved with a dataset release."""
+
+    config_file = config_file or (SPLITS_DIR / "split_config.json")
+
+    if not config_file.is_file():
+        raise FileNotFoundError(
+            f"Pipeline configuration snapshot not found: {config_file}"
+        )
+
+    with open(config_file, "r", encoding="utf-8") as file:
+        metadata = json.load(file)
+
+    snapshot = metadata.get("pipeline_configuration")
+
+    if not isinstance(snapshot, dict):
+        raise ValueError(
+            f"Pipeline configuration snapshot is missing from {config_file}"
+        )
+
+    return snapshot
+
+
+def check_pipeline_compatibility(
+    saved_snapshot,
+    artifact_name="artifact",
+):
+    """Raise an error when an artifact was created with another configuration."""
+
+    active_snapshot = get_pipeline_snapshot()
+
+    if saved_snapshot != active_snapshot:
+        raise ValueError(
+            f"{artifact_name} is incompatible with the active pipeline "
+            "configuration.\n"
+            f"Active configuration: {active_snapshot}\n"
+            f"Saved configuration: {saved_snapshot}"
+        )
+
+
+def validate_saved_pipeline_compatibility(config_file=None):
+    """Verify that the saved dataset release matches the active configuration."""
+
+    snapshot = load_saved_pipeline_snapshot(config_file)
+    check_pipeline_compatibility(snapshot, "Dataset release")

@@ -557,6 +557,18 @@ validation notebooks. The validator reads the split sizes and
 `CAPTIONS_PER_IMAGE` directly from `pipeline_config.py`; it does not contain
 release-specific counts.
 
+Alternatively, run the complete pipeline from the project root:
+
+```text
+python 01_src/run_pipeline.py
+```
+
+This command runs the three data scripts and the canonical preprocessing,
+embedding/knowledge-base, quality-control, and retrieval notebooks in order.
+It stops at the first failed stage. Use
+`python 01_src/run_pipeline.py --skip-notebooks` when only the split,
+annotation extraction, and dataset validation stages are required.
+
 ### 5.3 Changing the embedding model
 
 Changing CLIP or SBERT models requires regenerating the corresponding embeddings and vector indexes.
@@ -695,7 +707,7 @@ The following table distinguishes implemented work from remaining work.
 | Knowledge-base construction | Completed |
 | Knowledge-base quality control | Passed |
 | Retrieval compatibility smoke test | Passed |
-| Full preprocessing validation and selection | Pending |
+| Full preprocessing validation and selection | Implemented through `01_src/run_pipeline.py` |
 | Final release freezing | Pending |
 
 **Note:** The centralized configuration file and fully automated end-to-end execution are proposed improvements. They should not be considered implemented until the existing scripts and notebooks have been connected to the shared configuration and tested together.

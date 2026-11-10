@@ -64,6 +64,20 @@ The split is configuration-driven. To create a different release, update
 `01_src/config/pipeline_config.py`, then regenerate the split-dependent
 artifacts. Do not mix artifacts generated from different configurations.
 
+To regenerate the complete Phase 1 release with one command, run this from
+the project root:
+
+```text
+python 01_src/run_pipeline.py
+```
+
+The runner generates splits, extracts annotations and images, validates the
+dataset, executes preprocessing, regenerates embeddings and knowledge-base
+artifacts, and runs quality-control and retrieval validation. It executes
+notebooks in a temporary output directory so source notebooks are not
+overwritten. Use `--skip-notebooks` for the split, extraction, and validation
+stages only.
+
 ### 3.3 Data Leakage Prevention
 
 The following constraints are applied:
