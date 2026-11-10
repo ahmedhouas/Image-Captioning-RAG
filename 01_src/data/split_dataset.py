@@ -18,6 +18,8 @@ from config.pipeline_config import (
     TEST_CAPTIONS_FILE,
     TRAIN_IMAGES_DIR,
     TEST_IMAGES_DIR,
+    TRAIN_SOURCE,
+    TEST_SOURCE,
     SPLITS_DIR,
     RANDOM_SEED,
     TRAINING_SIZE,
@@ -25,6 +27,7 @@ from config.pipeline_config import (
     TEST_SIZE,
     TOTAL_TRAIN_POOL,
     CAPTIONS_PER_IMAGE,
+    get_pipeline_snapshot,
 )
 
 
@@ -212,9 +215,10 @@ def save_splits(training_ids, validation_ids, test_ids):
 
     # Build configuration metadata using centralized values
     config = {
+        "pipeline_configuration": get_pipeline_snapshot(),
         "random_seed": RANDOM_SEED,
-        "source_training_dataset": "COCO train2017",
-        "source_test_dataset": "COCO val2017",
+        "source_training_dataset": f"COCO {TRAIN_SOURCE}",
+        "source_test_dataset": f"COCO {TEST_SOURCE}",
         "total_selected_from_train2017": TOTAL_TRAIN_POOL,
 
         "training_images": len(training_ids),

@@ -78,3 +78,34 @@ NORMALIZE_EMBEDDINGS = True
 # ============================================================
 
 RETRIEVAL_TOP_K = 3
+
+
+def get_pipeline_snapshot():
+    """Return the configuration values that define a dataset release."""
+
+    return {
+        "random_seed": RANDOM_SEED,
+        "sources": {
+            "training": TRAIN_SOURCE,
+            "test": TEST_SOURCE,
+        },
+        "split_sizes": {
+            "training": TRAINING_SIZE,
+            "validation": VALIDATION_SIZE,
+            "test": TEST_SIZE,
+        },
+        "captions_per_image": CAPTIONS_PER_IMAGE,
+        "models": {
+            "clip": CLIP_MODEL_NAME,
+            "sbert": SBERT_MODEL_NAME,
+        },
+        "embedding": {
+            "clip_batch_size": CLIP_BATCH_SIZE,
+            "sbert_batch_size": SBERT_BATCH_SIZE,
+            "dtype": EMBEDDING_DTYPE,
+            "normalize": NORMALIZE_EMBEDDINGS,
+        },
+        "retrieval": {
+            "top_k": RETRIEVAL_TOP_K,
+        },
+    }

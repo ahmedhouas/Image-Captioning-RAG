@@ -130,7 +130,10 @@ NORMALIZE_EMBEDDINGS = True
 RETRIEVAL_TOP_K = 3
 ```
 
-These values represent the current project configuration. They are examples of the intended centralized configuration and should be connected to the existing scripts and notebooks before being treated as the pipeline's active configuration.
+These values are the active centralized configuration used by the splitting,
+extraction, validation, preprocessing, embedding, and knowledge-base checks.
+The generated `split_config.json` records a snapshot of the configuration used
+for each dataset release.
 
 ### 3.2 Configuration principles
 
@@ -539,6 +542,20 @@ Expected caption counts, assuming five captions per image:
 When split sizes change, regenerate every downstream artifact that depends on the selected IDs.
 
 In particular, the knowledge base must be rebuilt because its training images and captions have changed.
+
+The minimum command sequence for a new release is:
+
+```text
+python 01_src/data/split_dataset.py
+python 01_src/data/extract_annotations.py
+python 01_src/data/validate_dataset.py
+```
+
+Then rerun the preprocessing and embedding notebooks, rebuild the FAISS
+indexes and knowledge base, and rerun the quality-control and retrieval
+validation notebooks. The validator reads the split sizes and
+`CAPTIONS_PER_IMAGE` directly from `pipeline_config.py`; it does not contain
+release-specific counts.
 
 ### 5.3 Changing the embedding model
 

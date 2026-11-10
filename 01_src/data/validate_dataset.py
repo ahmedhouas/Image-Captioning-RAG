@@ -4,23 +4,34 @@ import hashlib
 from collections import Counter
 from pathlib import Path
 
+import sys
+
+
+# Add 01_src to Python's module search path
+SRC_DIR = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(SRC_DIR))
+
+from config.pipeline_config import (  # noqa: E402
+    CAPTIONS_PER_IMAGE,
+    PROCESSED_DATA,
+    SPLITS_DIR,
+    TEST_SIZE,
+    TRAINING_SIZE,
+    VALIDATION_SIZE,
+)
+
 
 # ============================================================
 # 1. PROJECT CONFIGURATION
 # ============================================================
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-
-PROCESSED_DATA = PROJECT_ROOT / "02_processed_data"
-SPLITS_DIR = PROCESSED_DATA / "splits"
-
 EXPECTED_SIZES = {
-    "training": 9900,
-    "validation": 100,
-    "test": 100
+    "training": TRAINING_SIZE,
+    "validation": VALIDATION_SIZE,
+    "test": TEST_SIZE,
 }
 
-EXPECTED_CAPTIONS_PER_IMAGE = 5
+EXPECTED_CAPTIONS_PER_IMAGE = CAPTIONS_PER_IMAGE
 
 
 # ============================================================

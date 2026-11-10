@@ -47,7 +47,7 @@ The original dataset is stored separately from the processed artifacts.
 
 ### 3.2 Dataset Splits
 
-The current project split is:
+The repository currently contains a generated release using the default split:
 
 | Split | Source | Images | Captions |
 |---|---|---:|---:|
@@ -59,6 +59,10 @@ The current project split is:
 The training and validation subsets together represent the selected 10,000 images from COCO train2017.
 
 The test subset is drawn from COCO val2017 and remains separate from the training knowledge base.
+
+The split is configuration-driven. To create a different release, update
+`01_src/config/pipeline_config.py`, then regenerate the split-dependent
+artifacts. Do not mix artifacts generated from different configurations.
 
 ### 3.3 Data Leakage Prevention
 
@@ -185,6 +189,7 @@ The dataset inspection phase verified:
 - Image readability.
 - Caption and annotation availability.
 - Dataset split organization.
+- Configuration-driven split generation and validation.
 - Image-caption relationships.
 
 ### 6.2 Statistical Exploration
