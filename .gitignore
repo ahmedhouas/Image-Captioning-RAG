@@ -12,8 +12,10 @@
 # Keep all processed data EXCEPT image files
 # ============================================================
 
-# Ignore image directories inside processed data
-/02_processed_data/**/images/
+# Ignore generated image files inside processed data while keeping directory
+# documentation trackable.
+/02_processed_data/**/images/*
+!/02_processed_data/**/images/README.md
 
 # Ignore image files anywhere else inside processed data
 /02_processed_data/**/*.jpg
