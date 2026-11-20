@@ -68,6 +68,7 @@ To regenerate the complete Phase 1 release with one command, run this from
 the project root:
 
 ```text
+python 01_src/setup_directories.py
 python 01_src/run_pipeline.py
 ```
 
@@ -77,6 +78,10 @@ artifacts, and runs quality-control and retrieval validation. It executes
 notebooks in a temporary output directory so source notebooks are not
 overwritten. Use `--skip-notebooks` for the split, extraction, and validation
 stages only.
+
+The setup command creates missing processed-data and analysis output
+directories. It does not create or download the ignored original dataset;
+place that dataset under `00_original_data/` first.
 
 ### 3.3 Data Leakage Prevention
 

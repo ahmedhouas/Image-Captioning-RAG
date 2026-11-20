@@ -2,7 +2,9 @@
 # ORIGINAL DATASET — NEVER UPLOAD
 # ============================================================
 
-/00_original_data/
+/00_original_data/*
+# Keep the dataset instructions versioned without uploading the dataset.
+!/00_original_data/README.md
 
 
 # ============================================================
@@ -48,3 +50,7 @@ venv/
 *.log
 .DS_Store
 Thumbs.db
+
+# Pipeline execution artifacts
+executed_*.ipynb
+.pipeline_tmp/

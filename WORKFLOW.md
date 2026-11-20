@@ -147,6 +147,16 @@ for each dataset release.
 
 ## 4. Execution Workflow
 
+Before running an individual stage, create the expected generated-output
+directories from the project root:
+
+```text
+python 01_src/setup_directories.py
+```
+
+This command is idempotent and only creates missing directories. It does not
+download the ignored COCO source dataset.
+
 ### Stage 1 — Dataset configuration
 
 **Purpose:** Define the dataset sources, split sizes, random seed, and output directories.
