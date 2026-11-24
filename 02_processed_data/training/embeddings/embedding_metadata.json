@@ -1,4 +1,30 @@
 {
+    "pipeline_configuration": {
+        "random_seed": 45,
+        "sources": {
+            "training": "train2017",
+            "test": "val2017"
+        },
+        "split_sizes": {
+            "training": 9900,
+            "validation": 100,
+            "test": 100
+        },
+        "captions_per_image": 5,
+        "models": {
+            "clip": "openai/clip-vit-base-patch32",
+            "sbert": "sentence-transformers/all-MiniLM-L6-v2"
+        },
+        "embedding": {
+            "clip_batch_size": 32,
+            "sbert_batch_size": 64,
+            "dtype": "float32",
+            "normalize": true
+        },
+        "retrieval": {
+            "top_k": 3
+        }
+    },
     "metadata_version": "1.0",
     "project": "Image Captioning RAG",
     "stage": "Phase 1 - Embedding Generation",
@@ -103,38 +129,12 @@
         "purpose": "Traceability between embedding rows and original dataset records"
     },
     "software_environment": {
-        "python": "3.11.4",
+        "python": "3.12.10",
         "pytorch": "2.15.0",
-        "transformers": "5.22.1",
-        "sentence_transformers": "6.2.0",
+        "transformers": "5.24.1",
+        "sentence_transformers": "6.3.0",
         "numpy": "1.26.4",
-        "pillow": "10.3.0"
+        "pillow": "12.3.0"
     },
-    "overall_validation_status": "passed",
-    "pipeline_configuration": {
-        "random_seed": 45,
-        "sources": {
-            "training": "train2017",
-            "test": "val2017"
-        },
-        "split_sizes": {
-            "training": 9900,
-            "validation": 100,
-            "test": 100
-        },
-        "captions_per_image": 5,
-        "models": {
-            "clip": "openai/clip-vit-base-patch32",
-            "sbert": "sentence-transformers/all-MiniLM-L6-v2"
-        },
-        "embedding": {
-            "clip_batch_size": 32,
-            "sbert_batch_size": 64,
-            "dtype": "float32",
-            "normalize": true
-        },
-        "retrieval": {
-            "top_k": 3
-        }
-    }
+    "overall_validation_status": "passed"
 }

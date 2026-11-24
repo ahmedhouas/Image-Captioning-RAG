@@ -9,7 +9,7 @@
 | Knowledge-base split | Training |
 | Random seed | 45 |
 | Report version | 1.0 |
-| Generated at (UTC) | 2026-11-06T00:51:15.183061+00:00 |
+| Generated at (UTC) | 2026-11-24T18:38:40.366723+00:00 |
 | Overall status | Passed |
 
 ## 2. Dataset Summary

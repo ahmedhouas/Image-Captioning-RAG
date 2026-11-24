@@ -199,7 +199,7 @@ def validate_one_split(split_name, expected_ids):
 
     actual_filenames = {
         path.name for path in images_dir.iterdir()
-        if path.is_file()
+        if path.is_file() and path.name != "README.md"
     }
 
     missing_files = expected_filenames - actual_filenames
@@ -397,7 +397,7 @@ def validate_duplicate_images():
 
         for image_file in images_dir.iterdir():
 
-            if not image_file.is_file():
+            if not image_file.is_file() or image_file.name == "README.md":
                 continue
 
             file_hash = get_file_hash(image_file)

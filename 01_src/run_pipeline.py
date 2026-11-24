@@ -5,7 +5,6 @@ from __future__ import annotations
 import argparse
 import os
 import subprocess
-import sys
 import tempfile
 from pathlib import Path
 
@@ -13,6 +12,13 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SRC_ROOT = PROJECT_ROOT / "01_src"
 NOTEBOOK_ROOT = SRC_ROOT / "notebooks"
+VENV_SCRIPTS = PROJECT_ROOT / ".venv" / (
+    "Scripts" if os.name == "nt" else "bin"
+)
+PYTHON_EXECUTABLE = VENV_SCRIPTS / (
+    "python.exe" if os.name == "nt" else "python"
+)
+NOTEBOOK_KERNEL = "image-captioning-rag"
 
 
 def run_command(label: str, command: list[str], env: dict[str, str]) -> None:
@@ -28,9 +34,9 @@ def run_python_script(
     script: Path,
     env: dict[str, str],
 ) -> None:
-    """Run a repository Python script with the active interpreter."""
+    """Run a repository Python script with the project virtual environment."""
 
-    run_command(label, [sys.executable, str(script)], env)
+    run_command(label, [str(PYTHON_EXECUTABLE), str(script)], env)
 
 
 def run_notebook(
@@ -44,7 +50,7 @@ def run_notebook(
     run_command(
         label,
         [
-            sys.executable,
+            str(PYTHON_EXECUTABLE),
             "-m",
             "jupyter",
             "nbconvert",
@@ -52,7 +58,7 @@ def run_notebook(
             "notebook",
             "--execute",
             "--ExecutePreprocessor.timeout=-1",
-            "--ExecutePreprocessor.kernel_name=python3",
+            f"--ExecutePreprocessor.kernel_name={NOTEBOOK_KERNEL}",
             "--output",
             f"executed_{notebook.name}",
             "--output-dir",
@@ -87,7 +93,16 @@ def main() -> int:
 
     args = build_parser().parse_args()
 
+    if not PYTHON_EXECUTABLE.is_file():
+        raise FileNotFoundError(
+            f"Project virtual environment not found: {PYTHON_EXECUTABLE}. "
+            "Create it and install requirements.txt before running the pipeline."
+        )
+
     env = os.environ.copy()
+    env["PATH"] = os.pathsep.join(
+        [str(VENV_SCRIPTS), env.get("PATH", "")]
+    )
     existing_pythonpath = env.get("PYTHONPATH")
     env["PYTHONPATH"] = (
         str(SRC_ROOT)

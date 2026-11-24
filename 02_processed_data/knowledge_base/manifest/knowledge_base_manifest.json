@@ -30,7 +30,7 @@
       "path": "documents/image_documents.json",
       "type": "JSON documents",
       "records": 9900,
-      "file_size_bytes": 9188590
+      "file_size_bytes": 9544990
     },
     {
       "name": "Caption documents",
@@ -44,13 +44,13 @@
       "path": "metadata/knowledge_base_metadata.json",
       "type": "JSON metadata",
       "records": null,
-      "file_size_bytes": 2630
+      "file_size_bytes": 3219
     }
   ],
   "excluded_data": [
     "validation",
     "test"
   ],
-  "generated_at_utc": "2026-11-06T00:29:06.519497+00:00",
+  "generated_at_utc": "2026-11-24T18:29:25.387011+00:00",
   "status": "completed"
 }

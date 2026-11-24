@@ -161,6 +161,7 @@ Image-Captioning-RAG/
 │
 ├── .gitignore
 ├── README.md
+├── PROJECT_REQUIREMENTS.md
 └── requirements.txt
 ```
 
@@ -168,21 +169,51 @@ Image-Captioning-RAG/
 
 ## 5. Development Environment
 
-The project was developed and tested using:
+Use Python 3.11 or 3.12. The dependency ranges for the data pipeline and
+notebooks are listed in `requirements.txt`. CPU execution is supported; CUDA
+is optional and requires a compatible PyTorch/CUDA installation.
 
-| Component | Version / Configuration |
-|---|---|
-| Operating system | Windows 11 |
-| Python | 3.11.4 |
-| PyTorch | 2.15.0+cpu |
-| Transformers | 5.22.1 |
-| Pillow | 10.3.0 |
-| Sentence-Transformers | 6.2.0 |
-| FAISS | 1.15.1 |
-| Execution environment | Jupyter Notebook |
-| Hardware | CPU |
+### 5.1 Windows setup (PowerShell)
 
-### 5.1 Models
+Run these commands from the repository root. They create a project-local
+virtual environment, install the project dependencies, add the notebook
+kernel, and create the expected output directories:
+
+```powershell
+py -3.12 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install --upgrade pip
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe -m ipykernel install --user --name image-captioning-rag --display-name "Python (Image Captioning RAG)"
+.\.venv\Scripts\python.exe -m spacy download en_core_web_sm
+.\.venv\Scripts\python.exe 01_src\setup_directories.py
+```
+
+If Python 3.12 is unavailable, create the environment with
+`py -3.11 -m venv .venv`. Run the tools with
+`.\.venv\Scripts\python.exe` (or activate `.venv` first). For CUDA
+acceleration, install the PyTorch build that matches the device's CUDA setup
+using the official PyTorch installation selector, then install the remaining
+packages from `requirements.txt`.
+
+The statistical-exploration notebook needs spaCy's `en_core_web_sm` model;
+the setup command above installs it. The CLIP and Sentence-Transformer model
+weights are downloaded on first use and require network access. The COCO
+dataset is not downloaded by setup: put the required files listed in
+[`PROJECT_REQUIREMENTS.md`](PROJECT_REQUIREMENTS.md) under `00_original_data/`.
+
+Check the environment and invoke the pipeline from the repository root:
+
+```powershell
+.\.venv\Scripts\python.exe -c "import torch, faiss, transformers, sentence_transformers; print('PyTorch:', torch.__version__); print('CUDA available:', torch.cuda.is_available())"
+.\.venv\Scripts\python.exe 01_src\run_pipeline.py --skip-notebooks
+```
+
+The pipeline command regenerates split files and extracted data, so use it
+only when that regeneration is intended. For notebook-based work, start
+JupyterLab with `.\.venv\Scripts\jupyter-lab.exe` and select the
+`Python (Image Captioning RAG)` kernel.
+
+### 5.2 Models
 
 **Image encoder**
 
